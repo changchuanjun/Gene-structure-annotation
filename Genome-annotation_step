@@ -1,0 +1,26 @@
+First of all, retrieve a BRAKER3 singularity container from https://github.com/Gaius-Augustus/BRAKER
+  singularity build braker3.sif docker://teambraker/braker3:latest
+
+Then prepare RNAseq data and homologous protein data
+1、For RNAseq data, both paired-end FASTQ files and single-end FASTQ file are available. 
+In my case, they are paired-end FASTQ files and located in the ./RNAseq_fastq/ directory and named like SRR21XXXXXX_1.fq.gz and SRR21XXXXXX_2.fq.gz.  
+Additionally, if you do not have the RNAseq data, You may need to download these files from a sequencing repository like NCBI SRA.
+
+2、For homologous protein data, gather homologous protein data from related species. 
+This could involve downloading protein sequences from databases like NCBI or UniProt.Organize these sequences into a FASTA file.
+
+Finally, run the pipeline:
+singularity exec -B /data:/data -B $PWD:$PWD braker3.sif braker.pl \
+        --genome=soft_masked.genome.fasta \
+        --prot_seq=homologous-protein.fasta \
+        --rnaseq_sets_ids=SRR21XXXXXX \
+        --rnaseq_sets_dir=./RNAseq_fastq/ \
+        --species=species_name \
+        --AUGUSTUS_ab_initio \
+        --gff3 \
+        --threads 8 \
+        --workingdir=./workdir_name \
+        --AUGUSTUS_CONFIG_PATH=Augustus_config_PATH \
+        --AUGUSTUS_BIN_PATH=Augustus_PATH \
+        --AUGUSTUS_SCRIPTS_PATH=Augustus_scripts_PATH
+
