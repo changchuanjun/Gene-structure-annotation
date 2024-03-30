@@ -1,4 +1,4 @@
-# Genome-annotation
+# Gene structure annotation
 Protein-coding genes were predicted from the genome using the BRAKER3 pipeline[1] that integrates RNA-Seq and protein homology information. RNA-Seq reads were aligned to the soft masked genome using HISAT2 (v2.2.1). Protein sequences from ...... were downloaded from NCBI (https://www.ncbi.nlm.nih.gov/) and aligned to the genome as the protein homology evidence.
 
 [1]BRAKER3: Fully automated genome annotation using RNA-Seq and protein evidence with GeneMark-ETP, AUGUSTUS and TSEBRA
